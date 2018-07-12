@@ -63,10 +63,10 @@ class platforms:
 
 
 class player(object):
-	walkRight = [pygame.image.load('DEATHR01.png'), pygame.image.load('DEATHR02.png'), pygame.image.load('DEATHR03.png')]
-	walkLeft = [pygame.image.load('DEATHL01.png'), pygame.image.load('DEATHL02.png'), pygame.image.load('DEATHL03.png')]
-	spReady = [pygame.image.load('SPECIAL01.PNG'), pygame.image.load('SPECIAL01.PNG'), pygame.image.load('SPECIAL02.PNG'),pygame.image.load('SPECIAL02.PNG'), pygame.image.load('SPECIAL03.PNG'), pygame.image.load('SPECIAL03.PNG')]
-	spHover = [pygame.image.load('SPECIALHOVER01.PNG'), pygame.image.load('SPECIALHOVER02.PNG'), pygame.image.load('SPECIALHOVER03.PNG'), pygame.image.load('SPECIALHOVER04.PNG')]
+	walkRight = [pygame.image.load('img/DEATHR01.png'), pygame.image.load('img/DEATHR02.png'), pygame.image.load('img/DEATHR03.png')]
+	walkLeft = [pygame.image.load('img/DEATHL01.png'), pygame.image.load('img/DEATHL02.png'), pygame.image.load('img/DEATHL03.png')]
+	spReady = [pygame.image.load('img/SPECIAL01.PNG'), pygame.image.load('img/SPECIAL01.PNG'), pygame.image.load('img/SPECIAL02.PNG'),pygame.image.load('img/SPECIAL02.PNG'), pygame.image.load('img/SPECIAL03.PNG'), pygame.image.load('img/SPECIAL03.PNG')]
+	spHover = [pygame.image.load('img/SPECIALHOVER01.PNG'), pygame.image.load('img/SPECIALHOVER02.PNG'), pygame.image.load('img/SPECIALHOVER03.PNG'), pygame.image.load('img/SPECIALHOVER04.PNG')]
 	hoverFrames = spHover[::] + spHover[::-1] + spHover[::] + spHover[::-1] + spHover[::] + spHover[::-1]
 
 	def __init__(self):
@@ -137,6 +137,9 @@ class player(object):
 				PLAYER.jumpCount = 10
 
 	def move(self):
+		if self.y > 1000:
+			print "you fell off the world."
+			self.y, self.x, self.renderatX = 0,0,0
 		print "xvel %d  self.x %d self.renderatx %d" % (self.xVelocity, self.x, self.renderatX)
 		# actually move player.x coordinate
 		self.x += self.xVelocity
@@ -222,8 +225,8 @@ class player(object):
 		HUD.draw()
 
 class scythe(object):
-	scytheLeft = [pygame.image.load('SCYTHEL01.png'), pygame.image.load('SWIPEL01.png'), pygame.image.load('SWIPEL01.png'), pygame.image.load('SWIPEL02.png'), pygame.image.load('SWIPEL02.png'), pygame.image.load('SWIPEL03.png'), pygame.image.load('SWIPEL03.png')]
-	scytheRight = [pygame.image.load('SCYTHER01.png'), pygame.image.load('SWIPER01.png'), pygame.image.load('SWIPER01.png'), pygame.image.load('SWIPER02.png'), pygame.image.load('SWIPER02.png'), pygame.image.load('SWIPER03.png'), pygame.image.load('SWIPER03.png')]
+	scytheLeft = [pygame.image.load('img/SCYTHEL01.png'), pygame.image.load('img/SWIPEL01.png'), pygame.image.load('img/SWIPEL01.png'), pygame.image.load('img/SWIPEL02.png'), pygame.image.load('img/SWIPEL02.png'), pygame.image.load('img/SWIPEL03.png'), pygame.image.load('img/SWIPEL03.png')]
+	scytheRight = [pygame.image.load('img/SCYTHER01.png'), pygame.image.load('img/SWIPER01.png'), pygame.image.load('img/SWIPER01.png'), pygame.image.load('img/SWIPER02.png'), pygame.image.load('img/SWIPER02.png'), pygame.image.load('img/SWIPER03.png'), pygame.image.load('img/SWIPER03.png')]
 	def __init__(self, x, y):
 		self.x = x
 		self.y = y
@@ -267,7 +270,7 @@ class titlescreen(object):
 			pygame.mixer.music.stop()
 			self.show = False
 			#start the bgm
-			bgm = pygame.mixer.music.load('bgm.mp3')
+			bgm = pygame.mixer.music.load('audio/bgm.mp3')
 			pygame.mixer.music.play(-1)
 
 
@@ -297,17 +300,17 @@ FPS = 24
 BLACK = (0, 0, 0, 255)
 WHITE = (255, 255, 255, 255)
 # some background set up
-bg = pygame.image.load("hugeBG.png").convert()
+bg = pygame.image.load("img/hugeBG.png").convert()
 bgWidth, bgHeight = bg.get_rect().size
 stageWidth = bgWidth
 
-titleimage = pygame.image.load('TITLE.png').convert()
+titleimage = pygame.image.load('img/TITLE.png').convert()
 
-hudimage = pygame.image.load('HUD.png').convert()
+hudimage = pygame.image.load('img/HUD.png').convert()
 hudimage.set_colorkey((84,109,142))
 
-weaponSound = pygame.mixer.Sound('whoosh.wav')
-specialSound = pygame.mixer.Sound('thunder.wav')
+weaponSound = pygame.mixer.Sound('audio/whoosh.wav')
+specialSound = pygame.mixer.Sound('audio/thunder.wav')
 
 # HW = W / 2 giving us 400 pixels on either side of player
 startScrollingPosX = HW
@@ -334,7 +337,7 @@ PLATFORMS.add(platform(150, 400, 1000))
 #	PLATFORMS.add(platform(random.randint(0, W - 50), random.randint(50, H - 60), 50))
 
 TITLESCREEN = titlescreen()
-music = pygame.mixer.music.load("TITLE.mp3")
+music = pygame.mixer.music.load("audio/TITLE.mp3")
 pygame.mixer.music.play(1)
 
 # play game	
