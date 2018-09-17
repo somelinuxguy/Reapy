@@ -18,7 +18,7 @@ class platform:
 		self.x2 = x + width
 
 	def test(self, player):
-		print "player x %d player y %d  platform1x: %d  platformx2 %d  platformY %d" % (player.x, player.y, self.x1, self.x2, self.y)
+		print ("player x %d player y %d  platform1x: %d  platformx2 %d  platformY %d" % (player.x, player.y, self.x1, self.x2, self.y))
 		# am I going to fall off the edge
 		if (player.x + 50) < self.x1 or (player.x + 50) > self.x2:
 			return None
@@ -42,12 +42,12 @@ class platforms:
 		for p in self.container:
 			result = p.test(player)
 			if result:
-				print "collision with platform at y: %d" % p.y
+				print("collision with platform at y: %d" % p.y)
 				player.falling = False
 				player.currentPlatform = result
 				# snap me back to the platform, plus my height.
 				player.y = result.y - 100
-				print "stop moving."
+				print("stop moving.")
 				return True
 		return False
 
@@ -98,11 +98,11 @@ class player(object):
 	def keys(self):
 		keys = pygame.key.get_pressed()
 		if keys[pygame.K_SPACE] and (not PLAYER.isBusy):
-			print "swing"
+			print("swing")
 			weapon.swing = True
 
 		if keys[pygame.K_s] and (not PLAYER.isBusy):
-				print "special"
+				print("special")
 				PLAYER.isBusy = True
 				PLAYER.specialRDY = True
 
@@ -138,9 +138,9 @@ class player(object):
 
 	def move(self):
 		if self.y > 1000:
-			print "you fell off the world."
+			print("you fell off the world.")
 			self.y, self.x, self.renderatX = 0,0,0
-		print "xvel %d  self.x %d self.renderatx %d" % (self.xVelocity, self.x, self.renderatX)
+		print ("xvel %d  self.x %d self.renderatx %d" % (self.xVelocity, self.x, self.renderatX))
 		# actually move player.x coordinate
 		self.x += self.xVelocity
 		if self.x > stageWidth - charWidth:
@@ -191,7 +191,7 @@ class player(object):
 			specialSound.play()
 
 		if self.specialRDY:
-			print "rendering spReady frame %d" % self.frameCount
+			print("rendering spReady frame %d" % self.frameCount)
 			win.blit(self.spReady[self.frameCount], (PLAYER.renderatX, PLAYER.y))
 			self.frameCount += 1
 
@@ -204,7 +204,7 @@ class player(object):
 			self.isBusy = False
 
 		if self.specialHVR and self.frameCount < len(self.hoverFrames):
-			print "Rendering hover frame %d" % self.frameCount
+			print("Rendering hover frame %d" % self.frameCount)
 			win.blit(self.hoverFrames[self.frameCount], (PLAYER.renderatX, PLAYER.y))
 			self.frameCount += 1
 
@@ -266,7 +266,7 @@ class titlescreen(object):
 	def keys(self):
 		keys = pygame.key.get_pressed()
 		if keys[pygame.K_p]:
-			print "turn off title"
+			print("turn off title")
 			pygame.mixer.music.stop()
 			self.show = False
 			#start the bgm
