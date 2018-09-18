@@ -5,7 +5,7 @@ A dump for my experiments with PyGame
 First you have to have a mac, or a linux machine, or at the very least you can
 use a Windows machine.
 
-Second, you need Python installed. This game works with Python 2.7 and is untested with 3.
+Second, you need Python installed. I have run this on Python 3, though I originally wrote it in 2.7. I recently got rid of the old version and upgraded to 3, and Reapy runs just fine for me. If you want to run it on Python 2.7 you will just need to comment out all the PRINT statements.
 
 Then you need to run:  pip install pygame
 
